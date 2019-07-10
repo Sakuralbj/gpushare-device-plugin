@@ -112,6 +112,10 @@ func (m *NvidiaDevicePlugin) Allocate(ctx context.Context,
 		// 1. Create container requests
 		for _, req := range reqs.ContainerRequests {
 			reqGPU := uint(len(req.DevicesIDs))
+			mount := pluginapi.Mount{
+				ContainerPath: "/tmp/nvidia-mps",
+				HostPath:      "/tmp/nvidia-mps",
+			}
 			response := pluginapi.ContainerAllocateResponse{
 				Envs: map[string]string{
 					envNVGPU:               candidateDevID,
@@ -120,6 +124,7 @@ func (m *NvidiaDevicePlugin) Allocate(ctx context.Context,
 					EnvResourceByContainer: fmt.Sprintf("%d", reqGPU),
 					EnvResourceByDev:       fmt.Sprintf("%d", getGPUMemory()),
 				},
+				Mounts: []*pluginapi.Mount{&mount},
 			}
 			responses.ContainerResponses = append(responses.ContainerResponses, &response)
 		}
