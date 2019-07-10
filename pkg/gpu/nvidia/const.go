@@ -28,6 +28,8 @@ const (
 	EnvResourceByDev       = "ALIYUN_COM_GPU_MEM_DEV"
 	EnvAssignedFlag        = "ALIYUN_COM_GPU_MEM_ASSIGNED"
 	EnvResourceAssumeTime  = "ALIYUN_COM_GPU_MEM_ASSUME_TIME"
+	EnvPipe                = "CUDA_MPS_PIPE_DIRECTORY"
+	EnvPercentage          = "CUDA_MPS_ACTIVE_THREAD_PERCENTAGE"
 	EnvResourceAssignTime  = "ALIYUN_COM_GPU_MEM_ASSIGN_TIME"
 
 	GiBPrefix = MemoryUnit("GiB")

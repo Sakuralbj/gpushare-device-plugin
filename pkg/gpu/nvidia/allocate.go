@@ -123,6 +123,8 @@ func (m *NvidiaDevicePlugin) Allocate(ctx context.Context,
 					EnvResourceByPod:       fmt.Sprintf("%d", podReqGPU),
 					EnvResourceByContainer: fmt.Sprintf("%d", reqGPU),
 					EnvResourceByDev:       fmt.Sprintf("%d", getGPUMemory()),
+					EnvPipe:                fmt.Sprintf("/tmp/nvidia-mps"),
+					EnvPercentage:          fmt.Sprint(100 * reqGPU / getGPUMemory()),
 				},
 				Mounts: []*pluginapi.Mount{&mount},
 			}
