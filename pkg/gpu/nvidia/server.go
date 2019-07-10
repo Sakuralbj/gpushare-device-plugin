@@ -23,16 +23,16 @@ type NvidiaDevicePlugin struct {
 	socket       string
 	mps          bool
 	healthCheck  bool
-
-	stop   chan struct{}
-	health chan *pluginapi.Device
+	mpspipe      string
+	stop         chan struct{}
+	health       chan *pluginapi.Device
 
 	server *grpc.Server
 	sync.RWMutex
 }
 
 // NewNvidiaDevicePlugin returns an initialized NvidiaDevicePlugin
-func NewNvidiaDevicePlugin(mps, healthCheck bool) *NvidiaDevicePlugin {
+func NewNvidiaDevicePlugin(mps, healthCheck bool, mpspipe string) *NvidiaDevicePlugin {
 	devs, devNameMap := getDevices()
 	devList := []string{}
 
@@ -55,9 +55,9 @@ func NewNvidiaDevicePlugin(mps, healthCheck bool) *NvidiaDevicePlugin {
 		socket:       serverSock,
 		mps:          mps,
 		healthCheck:  healthCheck,
-
-		stop:   make(chan struct{}),
-		health: make(chan *pluginapi.Device),
+		mpspipe:      mpspipe,
+		stop:         make(chan struct{}),
+		health:       make(chan *pluginapi.Device),
 	}
 }
 

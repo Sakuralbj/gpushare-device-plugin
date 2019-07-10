@@ -26,6 +26,7 @@ spec:
           - -logtostderr
           - --v=5
           - --memory-unit=GiB
+          - --mps-pipe=/root/nvidia-mps
         resources:
           limits:
             memory: "300Mi"
